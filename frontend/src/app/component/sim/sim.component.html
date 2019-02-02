@@ -1,0 +1,77 @@
+<div class="row" style="height: 100%; width:100%">
+  <div class="col-2" style="background-color: #373A3C">
+    <ul class="nav nav-pills flex-column " style="margin-top: 5%">
+      <li class="nav-item">
+        <button id="create" class="btn btn-success" (click)="create()">
+          <i class="fa fa-plus-square" aria-hidden="true"></i>
+        </button>
+      </li>
+      <li class="nav-item">
+        <form>
+          <select class="btn btn-primary" name="filter" [(ngModel)]='selectedFilter' (click)="clearSearch()">
+            <option value="all">All</option>
+            <option value="msisdn">Msisdn</option>
+            <option value="simNum">Card Number</option>
+            <option value="imsi">Imsi</option>
+            <option value="operator">Operator</option>
+            <option value="service">Service</option>
+            <option value="environment">Environment</option>
+            <option value="state">State</option>
+            <option value="user">User</option>
+          </select>
+        </form>
+      </li>
+      <li>
+        <input placeholder="Search" type="text" [(ngModel)]='listFilter'/>
+        <button id="search" class="btn btn-primary" (click)="search()">Search</button>
+      </li>
+    </ul>
+  </div>
+  <div class="col-10" style="display: table">
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th scope="col">Msisdn</th>
+        <th scope="col">Number</th>
+        <th scope="col">Imsi</th>
+        <th scope="col">Operator</th>
+        <th scope="col">Service</th>
+        <th scope="col">Environment</th>
+        <th scope="col">State</th>
+        <th scope="col">User</th>
+        <th scope="col">Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let sim of filteredSims">
+        <td>{{sim.msisdn}}</td>
+        <td>{{sim.simNumber}}</td>
+        <td>{{sim.imsi}}</td>
+        <td>{{sim.operator}}</td>
+        <td>{{sim.simService}}</td>
+        <td>{{sim.environment}}</td>
+        <td>{{sim.simState}}</td>
+        <td>{{sim.user.nickName}}</td>
+        <td>
+          <div class="btn-toolbar">
+            <button class="btn btn-primary btn-sm" (click)="onAuditsClick(sim.id)">AUD</button>
+            <button class="btn btn-primary btn-sm" (click)="edit(sim)">
+              <i class="fa fa-pencil" aria-hidden="true"></i>
+            </button>
+            <button class="btn btn-danger btn-sm" (click)="delete(sim.id)">
+              <i class="fa fa-trash" aria-hidden="true"></i>
+            </button>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <div>
+      <ul class="pagination">
+        <li class="page-item" *ngFor="let page of totalPages;let i = index">
+          <a class="page-link" [hidden]="!showPaging" (click)="setPage(i)">{{i+1}}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

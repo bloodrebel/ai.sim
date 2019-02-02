@@ -1,0 +1,12 @@
+### IntelliJ IDEA ###
+**/target
+.idea
+*.iws
+*.iml
+*.ipr
+**/npm-debug*
+node_modules
+frontend/dist
+**/*bundle.js.map
+**/*bundle.js
+*.log

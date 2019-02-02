@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+
+    <changeSet id="20181115135648-1" author="jskoko">
+        <createTable tableName="AI_USER">
+            <column name="ID_USER" autoIncrement="true" type="INT">
+                <constraints primaryKey="true" primaryKeyName="AI_USER_PK"></constraints>
+            </column>
+            <column name="FIRST_NAME" type="VARCHAR(255)">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="LAST_NAME" type="VARCHAR(255)">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="NICKNAME" type="VARCHAR(255)">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="E_MAIL" type="VARCHAR(255)">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="TEAM" type="VARCHAR(255)">
+                <constraints nullable="false"></constraints>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20181115141623-2" author="jskoko">
+        <createTable tableName="AI_SIM">
+            <column name="ID_SIM" autoIncrement="true" type="INT">
+                <constraints primaryKey="true" primaryKeyName="AI_SIM_PK"></constraints>
+            </column>
+            <column name="MSISDN" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true"></constraints>
+            </column>
+            <column name="SIM_NUM" type="VARCHAR(255)">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="IMSI" type="VARCHAR(255)">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="ID_USER" type="INT">
+                <constraints nullable="false"></constraints>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20181115144631-3" author="jskoko">
+        <addForeignKeyConstraint baseTableName="AI_SIM" baseColumnNames="ID_USER" constraintName="AI_SIM_FK1"
+                                 referencedTableName="AI_USER"
+                                 referencedColumnNames="ID_USER"></addForeignKeyConstraint>
+    </changeSet>
+    <changeSet id="20181116133031-4" author="jskoko">
+        <renameColumn tableName="AI_USER" oldColumnName="ID_USER" newColumnName="ID"></renameColumn>
+        <renameColumn tableName="AI_SIM" oldColumnName="ID_SIM" newColumnName="ID"></renameColumn>
+    </changeSet>
+    <changeSet id="20181119093922-5" author="jskoko">
+        <addColumn tableName="AI_SIM">
+            <column name="OPERATOR" type="VARCHAR(255)">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="SIM_SERVICE" type="VARCHAR(255)">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="ENVIRONMENT" type="VARCHAR(255)">
+                <constraints nullable="false"></constraints>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet id="20181130133442-6" author="isiljegovic">
+        <addUniqueConstraint columnNames="NICKNAME" constraintName="AI_USER_UNIQUE_NICKNAME_UC1" tableName="AI_USER"/>
+        <addUniqueConstraint columnNames="E_MAIL" constraintName="AI_USER_UNIQUE_E_MAIL_UC2" tableName="AI_USER"/>
+        <addUniqueConstraint columnNames="MSISDN" constraintName="AI_SIM_UNIQUE_MSISDN_UC3" tableName="AI_SIM"/>
+        <addUniqueConstraint columnNames="SIM_NUM" constraintName="AI_SIM_UNIQUE_SIM_NUM_UC4" tableName="AI_SIM"/>
+        <addUniqueConstraint columnNames="IMSI" constraintName="AI_SIM_UNIQUE_IMSI_UC5" tableName="AI_SIM"/>
+    </changeSet>
+    <changeSet id="20181205151646-7" author="jskoko">
+        <addColumn tableName="AI_SIM">
+            <column name="SIM_STATE" type="VARCHAR(255)">
+                <constraints nullable="false"></constraints>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet id="20181612155523-8" author="dtzelenika">
+        <createTable tableName="AI_EXTERNAL_APPLICATION">
+            <column name="ID" autoIncrement="true" type="INT">
+                <constraints primaryKey="true" primaryKeyName="AI_EXTERNAL_APPLICATION_PK"></constraints>
+            </column>
+            <column name="CODE" type="VARCHAR2(255)"/>
+            <column name="URL" type="VARCHAR2(255)"/>
+            <column name="TOKEN" type="VARCHAR2(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="20182812104722-9" author="dtzelenika">
+        <createTable tableName="AI_SIM_AUDIT">
+            <column name="AUD_ID" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="AI_SIM_AUDIT_PK"/>
+            </column>
+            <column name="ACTION" type="VARCHAR2(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ACTION_DATE" type="TIMESTAMP(6)"/>
+            <column name="ID" type="BIGINT"/>
+            <column name="ENVIRONMENT" type="VARCHAR2(255)"/>
+            <column name="IMSI" type="VARCHAR2(255)"/>
+            <column name="MSISDN" type="VARCHAR2(255)"/>
+            <column name="OPERATOR" type="VARCHAR2(255)"/>
+            <column name="SIM_NUMBER" type="VARCHAR2(255)"/>
+            <column name="SIM_SERVICE" type="VARCHAR2(255)"/>
+            <column name="SIM_STATE" type="VARCHAR2(255)"/>
+            <column name="ID_USER" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="20190301083622-9" author="dtzelenika">
+        <modifyDataType tableName="AI_SIM_AUDIT" columnName="ACTION_DATE" newDataType="DATETIME"/>
+    </changeSet>
+    <changeSet id="20190301083622-10" author="dtzelenika">
+        <addAutoIncrement tableName="AI_SIM_AUDIT" columnName="AUD_ID" columnDataType="BIGINT"/>
+    </changeSet>
+    <changeSet id="20190301135051-10" author="isiljegovic">
+        <dropColumn
+                    columnName="ID_USER"
+                    tableName="AI_SIM_AUDIT"/>
+        <addColumn
+                   tableName="AI_SIM_AUDIT">
+            <column name="USER_NICKNAME" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="20192201152744-11" author="jskoko">
+        <createTable tableName="AI_MODERATOR">
+            <column name="MOD_ID" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="AI_SIM_MODERATOR_PK"></constraints>
+            </column>
+            <column name="USERNAME" type="VARCHAR2(255)">
+                <constraints nullable="false" unique="true"></constraints>
+            </column>
+            <column name="PASSWORD" type="VARCHAR2(255)">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="ROLE" type="VARCHAR2(255)">
+                <constraints nullable="false"></constraints>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="20192301111523-11" author="jskoko">
+        <addAutoIncrement tableName="AI_MODERATOR" columnName="MOD_ID" columnDataType="BIGINT"></addAutoIncrement>
+    </changeSet>
+</databaseChangeLog>

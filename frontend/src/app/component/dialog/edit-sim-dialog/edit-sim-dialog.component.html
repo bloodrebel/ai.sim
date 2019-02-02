@@ -1,0 +1,63 @@
+<h1 mat-dialog-title>Upiši podatke</h1>
+<form #form="ngForm">
+  <div mat-dialog-content class="custom-form-container">
+    <input type="hidden" name="id" [(ngModel)]="data.id">
+    <mat-form-field>
+      <input #msisdn="ngModel" matInput placeholder="Msisdn" name="msisdn" [(ngModel)]="data.msisdn" required>
+      <mat-error *ngIf="msisdn.invalid && msisdn.touched">Please enter Msisdn</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input #simNumber="ngModel" matInput placeholder="Number" name="simNumber" [(ngModel)]="data.simNumber" required>
+      <mat-error *ngIf="simNumber.invalid && simNumber.touched">Please enter Number</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input #imsi="ngModel" matInput placeholder="Imsi" name="imsi" [(ngModel)]="data.imsi" required>
+      <mat-error *ngIf="imsi.invalid && imsi.touched">Please enter imsi</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select placeholder="Select operator" name="operator" [(ngModel)]="data.operator" required>
+        <mat-option value="HALOO">HALOO</mat-option>
+        <mat-option value="HEJ">HEJ</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select placeholder="Select service" name="simService" [(ngModel)]="data.simService" required>
+        <mat-option value="PREPAID">PREPAID</mat-option>
+        <mat-option value="POSTPAID">POSTPAID</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select placeholder="Select environment" name="environment" [(ngModel)]="data.environment" required>
+        <mat-option value="PRODUCTION">PRODUCTION</mat-option>
+        <mat-option value="DEV">DEV</mat-option>
+        <mat-option value="TEST">TEST</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select placeholder="Select state" name="simState" [(ngModel)]="data.simState" required>
+        <mat-option value="ACTIVE">ACTIVE</mat-option>
+        <mat-option value="TERMINATED">TERMINATED</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select placeholder="Select user" name="user" [(ngModel)]="data.user.id" required>
+        <mat-option *ngFor="let user of users" [value]="user.id">{{user.nickName}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onCancel()">Cancel</button>
+    <button mat-button [disabled]="form.invalid" (click)="edit(data)">Confirm</button>
+  </div>
+  <div *ngIf="errorMessage != null" mat-dialog-content style="margin-top: 13px">
+    <mat-error>{{errorMessage}}</mat-error>
+  </div>
+</form>

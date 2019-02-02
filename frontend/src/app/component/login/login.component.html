@@ -1,0 +1,19 @@
+
+<div class="jumbotron">
+  <h1 class="display-3">Welcome!</h1>
+  <p class="lead">Please login to proceed</p>
+  <hr class="my-4">
+  <div class="col-sm-5">
+    <label for="username">Username</label>
+    <input class="form-control"  id="username" type="text"  placeholder="Enter username" [(ngModel)]="username">
+  </div>
+  <div class="col-sm-5">
+    <label for="exampleInputPassword1">Password</label>
+    <input class="form-control" id="exampleInputPassword1" type="password" placeholder="Enter Password" [(ngModel)]="password">
+  </div>
+  <p class="col-sm-5">
+    <a class="btn btn-primary btn-lg" role="button" (click)="tryLogin()">Login</a>
+  </p>
+  <p style="color: red">{{message}}</p>
+  <p>Don't have account? </p> <a [routerLink]="['/register']" class="nav-link"> Register</a>
+</div>

@@ -1,0 +1,26 @@
+
+<div class="jumbotron">
+  <h1 class="display-3">Register</h1>
+  <p class="lead">Please register</p>
+  <hr class="my-4">
+  <form #form="ngForm">
+  <div class="col-sm-5">
+    <label for="username">Username</label>
+    <input class="form-control"  id="username" type="text"  placeholder="Enter username" name="username" required minlength="4" [(ngModel)]="username">
+  </div>
+  <div class="col-sm-5">
+    <label for="exampleInputPassword1">Password</label>
+    <input class="form-control" id="exampleInputPassword1" type="password" placeholder="Re-enter Password" name="password" minlength="4" required [(ngModel)]="password">
+  </div>
+  <div class="col-sm-5">
+    <label for="examplereInputPassword1">Confirm Password</label>
+    <input class="form-control" id="examplereInputPassword1" type="password" placeholder="Re-nter Password" name="rePassword" required [(ngModel)]="rePassword">
+  </div>
+  <input type="hidden" [(ngModel)]="role">
+  <p class="col-sm-5">
+    <button class="btn btn-primary btn-lg" [disabled]="form.invalid" (click)="tryRegister()">Login</button>
+  </p>
+  </form>
+  <p style="color: red">{{message}}</p>
+  <a [routerLink]="['/login']" class="nav-link">Return to login page</a>
+</div>

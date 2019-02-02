@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <ai_user id="1" first_name="Pero" last_name="Peric" nickname="Pesa" e_mail="pericpero@altima.hr" team="DEV"/>
+    <ai_user id="2" first_name="Mario" last_name="Mandzukic" nickname="Mandzo" e_mail="mandzoo@altima.hr" team="OC"/>
+    <ai_user id="3" first_name="Stipe" last_name="Pletikosa" nickname="peSti" e_mail="pletikosastipe@altima.hr"
+          team="SAP"/>
+    <ai_user id="4" first_name="Bojan" last_name="Bogdanovic" nickname="babo" e_mail="baboretta@altima.hr" team="DEV"/>
+    <ai_user id="5" first_name="Marin" last_name="Cilic" nickname="promasaj" e_mail="cilicmarin@altima.hr" team="SAP"/>
+</dataset>

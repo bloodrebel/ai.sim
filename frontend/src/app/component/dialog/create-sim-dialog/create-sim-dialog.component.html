@@ -1,0 +1,63 @@
+<h1 mat-dialog-title>Upiši podatke</h1>
+<form #form="ngForm">
+  <div mat-dialog-content class="custom-form-container">
+    <p>SIM</p>
+    <mat-form-field>
+      <input #msisdn="ngModel" matInput placeholder="Msisdn" name="msisdn" [(ngModel)]="sims.msisdn" required>
+      <mat-error *ngIf="msisdn.invalid && msisdn.touched">Please enter Msisdn</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input #simNumber="ngModel" matInput placeholder="Sim Number" name="simNumber" [(ngModel)]="sims.simNumber"
+             required>
+      <mat-error *ngIf="simNumber.invalid && simNumber.touched">Please enter sim number</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input #imsi matInput placeholder="Imsi" name="imsi" [(ngModel)]="sims.imsi" required>
+      <mat-error *ngIf="imsi.invalid && imsi.touched">Please enter Imsi</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select placeholder="Select operator" name="operator" [(ngModel)]="sims.operator" required>
+        <mat-option value="HALOO">HALOO</mat-option>
+        <mat-option value="HEJ">HEJ</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Select service" name="simService" [(ngModel)]="sims.simService" required>
+        <mat-option value="PREPAID">PREPAID</mat-option>
+        <mat-option value="POSTPAID">POSTPAID</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select placeholder="Select environment" name="environment" [(ngModel)]="sims.environment" required>
+        <mat-option value="PRODUCTION">PRODUCTION</mat-option>
+        <mat-option value="DEV">DEV</mat-option>
+        <mat-option value="TEST">TEST</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select placeholder="Select state" name="simState" [(ngModel)]="sims.simState" required>
+        <mat-option value="ACTIVE">ACTIVE</mat-option>
+        <mat-option value="TERMINATED">TERMINATED</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select placeholder="Select user" name="user" [(ngModel)]="sims.user" required>
+        <mat-option *ngFor="let user of users" [value]="user">{{user.nickName}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onCancelClick()">Cancel</button>
+    <button mat-button [disabled]="form.invalid" (click)="create(sims)">Ok</button>
+  </div>
+  <div *ngIf="errorMessage != null" mat-dialog-content style="margin-top: 13px">
+    <mat-error>{{errorMessage}}</mat-error>
+  </div>
+</form>

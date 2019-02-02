@@ -1,0 +1,15 @@
+form {
+  margin: 15px 0px;
+}
+
+td {
+  font-size: 13px;
+}
+
+#create, select, input {
+  width: 100%;
+}
+
+#search {
+  margin-top: 15px;
+}

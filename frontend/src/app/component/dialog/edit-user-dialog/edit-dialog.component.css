@@ -1,0 +1,8 @@
+.custom-form-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.custom-form-container > * {
+  width: 100%;
+}
